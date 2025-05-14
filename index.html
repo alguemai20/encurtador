@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Encurtador de Links Simples</title>
+</head>
+<body>
+<h1>Encurtador de Links Simples</h1>
+
+<input type="text" id="inputUrl" placeholder="Cole o link aqui" style="width: 300px;" />
+<button onclick="encurtar()">Encurtar</button>
+
+<p id="resultado"></p>
+
+<script>
+const baseURL = "https://meusite.com/"; // https://www.mediafire.com/file/rra46qsx8ck1zou/neynosantosclips.mp4/file
+
+function gerarChave(tamanho = 6) {
+  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let chave = "";
+  for(let i = 0; i < tamanho; i++) {
+    chave += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return chave;
+}
+
+function encurtar() {
+  const url = document.getElementById("inputUrl").value.trim();
+  if(!url) {
+    alert("Por favor, insira um link válido.");
+    return;
+  }
+  const chave = gerarChave();
+  const linkCurto = baseURL + chave;
+  document.getElementById("resultado").innerHTML = `
+    Link curto: <a href="${url}" target="_blank">${linkCurto}</a>
+    <br/>
+    (Obs: Este é só um exemplo, o link curto não redireciona automaticamente)
+  `;
+}
+</script>
+</body>
+</html>
